@@ -180,7 +180,7 @@ def display_map(geodf,columns_view):
     choropleth.add_to(map)
 
     folium.features.GeoJson(
-                    data=merge,
+                    data=geodf,
                     name='New Cases Past 7 days (Per 100K Population)',
                     smooth_factor=2,
                     style_function=lambda x: {'color':'black','fillColor':'transparent','weight':0.5},
