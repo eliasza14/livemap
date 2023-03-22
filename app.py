@@ -182,9 +182,10 @@ def display_map(df):
     
     st_map = st_folium(map, width=700, height=450)
 
+    # st_map2=st_folium(st_map)
     state_name = ''
-    if st_map['last_active_drawing']:
-        state_name = st_map['last_active_drawing']['properties']['name']
+    # if st_map['last_active_drawing']:
+    #     state_name = st_map['last_active_drawing']['properties']['per_enotita']
     return state_name
 
 
@@ -197,7 +198,7 @@ def main():
     #Load Data
     # df_continental = pd.read_csv('AxS-Continental_Full Data_data.csv')
     geodf=geopandas.read_file('testgeo.geojson')
-
+    df= pd.read_excel('komgeodata.xlsx',dtype={'KALCODE':str})
 
     #Display Filters and Map
     # year, quarter = display_time_filters(df_continental)
