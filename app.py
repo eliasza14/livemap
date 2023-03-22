@@ -241,13 +241,13 @@ def main():
     #Display Metrics
     st.subheader(f'{state_name} {report_type} Facts')
 
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        display_fraud_facts(df_fraud, year, quarter, report_type, state_name, 'State Fraud/Other Count', f'# of {report_type} Reports', string_format='{:,}')
-    with col2:
-        display_fraud_facts(df_median, year, quarter, report_type, state_name, 'Overall Median Losses Qtr', 'Median $ Loss', is_median=True)
-    with col3:
-        display_fraud_facts(df_loss, year, quarter, report_type, state_name, 'Total Losses', 'Total $ Loss')        
+    # col1, col2, col3 = st.columns(3)
+    # with col1:
+    #     display_fraud_facts(df_fraud, year, quarter, report_type, state_name, 'State Fraud/Other Count', f'# of {report_type} Reports', string_format='{:,}')
+    # with col2:
+    #     display_fraud_facts(df_median, year, quarter, report_type, state_name, 'Overall Median Losses Qtr', 'Median $ Loss', is_median=True)
+    # with col3:
+    #     display_fraud_facts(df_loss, year, quarter, report_type, state_name, 'Total Losses', 'Total $ Loss')        
 
 
 if __name__ == "__main__":
