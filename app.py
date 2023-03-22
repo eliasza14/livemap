@@ -180,26 +180,26 @@ def display_map(geodf,columns_view):
     )
     choropleth.add_to(map)
 
-    # folium.features.GeoJson(
-    #                 data=geodf,
-    #                 name='New Cases Past 7 days (Per 100K Population)',
-    #                 smooth_factor=2,
-    #                 style_function=lambda x: {'color':'black','fillColor':'transparent','weight':0.5},
-    #                 tooltip=folium.features.GeoJsonTooltip(
-    #                     fields=columns_view,
-    #                     aliases=columns_view, 
-    #                     localize=True,
-    #                     sticky=False,
-    #                     labels=True,
-    #                     style="""
-    #                         background-color: #F0EFEF;
-    #                         border: 2px solid black;
-    #                         border-radius: 3px;
-    #                         box-shadow: 3px;
-    #                     """,
-    #                     max_width=800,),
-    #                     highlight_function=lambda x: {'weight':3,'fillColor':'grey'},
-    #                     ).add_to(map)   
+    folium.features.GeoJson(
+                    data=geodf,
+                    name='New Cases Past 7 days (Per 100K Population)',
+                    smooth_factor=2,
+                    style_function=lambda x: {'color':'black','fillColor':'transparent','weight':0.5},
+                    tooltip=folium.features.GeoJsonTooltip(
+                        fields=columns_view,
+                        aliases=columns_view, 
+                        localize=True,
+                        sticky=False,
+                        labels=True,
+                        style="""
+                            background-color: #F0EFEF;
+                            border: 2px solid black;
+                            border-radius: 3px;
+                            box-shadow: 3px;
+                        """,
+                        max_width=800,),
+                        highlight_function=lambda x: {'weight':3,'fillColor':'grey'},
+                        ).add_to(map)   
     # st_map = st_folium(map, width=700, height=450)
 
     # st_map2=st_folium(st_map)
