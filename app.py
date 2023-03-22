@@ -158,6 +158,7 @@ import folium
 from streamlit_folium import st_folium
 import geopandas 
 from folium.features import GeoJsonTooltip
+from streamlit.components.v1 import iframe
 
 
 APP_TITLE = 'Fraud and Identity Theft Report'
