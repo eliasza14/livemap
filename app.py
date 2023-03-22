@@ -166,7 +166,7 @@ APP_SUB_TITLE = 'Source: Federal Trade Commission'
 
 
 def display_map(geodf,columns_view):
-    st.write(geodf)
+    # st.write(geodf)
     map = folium.Map(location=[40, 23], zoom_start=6, scrollWheelZoom=False, tiles='CartoDB positron')
     
     choropleth = folium.Choropleth(
@@ -179,26 +179,26 @@ def display_map(geodf,columns_view):
     )
     choropleth.add_to(map)
 
-    folium.features.GeoJson(
-                    data=geodf,
-                    name='New Cases Past 7 days (Per 100K Population)',
-                    smooth_factor=2,
-                    style_function=lambda x: {'color':'black','fillColor':'transparent','weight':0.5},
-                    tooltip=folium.features.GeoJsonTooltip(
-                        fields=columns_view,
-                        aliases=columns_view, 
-                        localize=True,
-                        sticky=False,
-                        labels=True,
-                        style="""
-                            background-color: #F0EFEF;
-                            border: 2px solid black;
-                            border-radius: 3px;
-                            box-shadow: 3px;
-                        """,
-                        max_width=800,),
-                        highlight_function=lambda x: {'weight':3,'fillColor':'grey'},
-                        ).add_to(map)   
+    # folium.features.GeoJson(
+    #                 data=geodf,
+    #                 name='New Cases Past 7 days (Per 100K Population)',
+    #                 smooth_factor=2,
+    #                 style_function=lambda x: {'color':'black','fillColor':'transparent','weight':0.5},
+    #                 tooltip=folium.features.GeoJsonTooltip(
+    #                     fields=columns_view,
+    #                     aliases=columns_view, 
+    #                     localize=True,
+    #                     sticky=False,
+    #                     labels=True,
+    #                     style="""
+    #                         background-color: #F0EFEF;
+    #                         border: 2px solid black;
+    #                         border-radius: 3px;
+    #                         box-shadow: 3px;
+    #                     """,
+    #                     max_width=800,),
+    #                     highlight_function=lambda x: {'weight':3,'fillColor':'grey'},
+    #                     ).add_to(map)   
     
     st_map = st_folium(map, width=700, height=450)
 
@@ -234,7 +234,7 @@ def main():
 
 
     #Display Metrics
-    st.subheader(f'{state_name} Facts')
+    # st.subheader(f'{state_name} Facts')
 
     # col1, col2, col3 = st.columns(3)
     # with col1:
