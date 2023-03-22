@@ -233,7 +233,8 @@ def main():
     
     
     # state_name = display_map(geodf,columns_view)
-    st.markdown(display_map(geodf,columns_view), unsafe_allow_html=True)
+    html=display_map(geodf,columns_view)
+    st.markdown(html, unsafe_allow_html=True)
 
     #Display Metrics
     # st.subheader(f'{state_name} Facts')
