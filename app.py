@@ -164,7 +164,7 @@ APP_TITLE = 'Fraud and Identity Theft Report'
 APP_SUB_TITLE = 'Source: Federal Trade Commission'
 
 
-@st.cache(allow_output_mutation=True)
+@st.cache()
 def display_map(geodf,columns_view):
     # st.write(geodf)
     map = folium.Map(location=[40, 23], zoom_start=6, scrollWheelZoom=False, tiles='CartoDB positron')
@@ -199,13 +199,14 @@ def display_map(geodf,columns_view):
     #                     max_width=800,),
     #                     highlight_function=lambda x: {'weight':3,'fillColor':'grey'},
     #                     ).add_to(map)   
-    st_map = st_folium(map, width=700, height=450)
+    # st_map = st_folium(map, width=700, height=450)
 
     # st_map2=st_folium(st_map)
-    state_name = ''
-    if st_map['last_active_drawing']:
-        state_name = st_map['last_active_drawing']['properties']['LEKTIKO']
-    return state_name
+    # state_name = ''
+    # if st_map['last_active_drawing']:
+    #     state_name = st_map['last_active_drawing']['properties']['LEKTIKO']
+    return map._repr_html_()
+    # return state_name
 
 
 
@@ -231,8 +232,8 @@ def main():
        'Επαγγελματίες υγείας που πραγματοποιούν μοριακά τεστ και εμβολιάζουν','Οδηγοί']
     
     
-    state_name = display_map(geodf,columns_view)
-
+    # state_name = display_map(geodf,columns_view)
+    st.markdown(display_map(geodf,columns_view), unsafe_allow_html=True)
 
     #Display Metrics
     # st.subheader(f'{state_name} Facts')
