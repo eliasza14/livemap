@@ -158,7 +158,7 @@ import folium
 from streamlit_folium import st_folium
 import geopandas 
 from folium.features import GeoJsonTooltip
-from streamlit.components.v1 import iframe
+import  streamlit.components.v1 
 
 
 APP_TITLE = 'Fraud and Identity Theft Report'
@@ -219,7 +219,8 @@ def main():
     st.set_page_config(APP_TITLE)
     st.title(APP_TITLE)
     st.caption(APP_SUB_TITLE)
-
+    html_code = "<h1>Hello, Streamlit!</h1>"
+    st.components.v1.html(html_code)
     #Load Data
     # df_continental = pd.read_csv('AxS-Continental_Full Data_data.csv')
     # geodf=geopandas.read_file('testgeo.geojson')
