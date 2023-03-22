@@ -164,7 +164,7 @@ APP_TITLE = 'Fraud and Identity Theft Report'
 APP_SUB_TITLE = 'Source: Federal Trade Commission'
 
 
-
+@st.cache(allow_output_mutation=True)
 def display_map(geodf,columns_view):
     # st.write(geodf)
     map = folium.Map(location=[40, 23], zoom_start=6, scrollWheelZoom=False, tiles='CartoDB positron')
@@ -199,7 +199,6 @@ def display_map(geodf,columns_view):
     #                     max_width=800,),
     #                     highlight_function=lambda x: {'weight':3,'fillColor':'grey'},
     #                     ).add_to(map)   
-    
     st_map = st_folium(map, width=700, height=450)
 
     # st_map2=st_folium(st_map)
@@ -230,6 +229,8 @@ def main():
        'Λοιποί επαγγελματίες υγείας που δεν εμβολιάζουν', 'Ιατροί/Βιολόγοι που πραγματοποιούν μοριακά τεστ',
        'Νοσηλευτές που πραγματοποιούν μοριακά τεστ',
        'Επαγγελματίες υγείας που πραγματοποιούν μοριακά τεστ και εμβολιάζουν','Οδηγοί']
+    
+    
     state_name = display_map(geodf,columns_view)
 
 
