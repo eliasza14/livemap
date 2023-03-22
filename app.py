@@ -168,38 +168,65 @@ APP_SUB_TITLE = 'Source: Federal Trade Commission'
 @st.cache()
 def display_map(geodf,columns_view):
     # st.write(geodf)
-    map = folium.Map(location=[40, 23], zoom_start=6, scrollWheelZoom=False, tiles='CartoDB positron')
+    # map = folium.Map(location=[40, 23], zoom_start=6, scrollWheelZoom=False, tiles='CartoDB positron')
     
-    choropleth = folium.Choropleth(
-        geo_data=geodf,
-        data=geodf,
-        columns=('per_enotita','Πληθυσμός'),
-        key_on='properties.LEKTIKO',
-        line_opacity=0.8,
-        highlight=True
-    )
-    choropleth.add_to(map)
 
-    folium.features.GeoJson(
-                    data=geodf,
-                    name='New Cases Past 7 days (Per 100K Population)',
-                    smooth_factor=2,
-                    style_function=lambda x: {'color':'black','fillColor':'transparent','weight':0.5},
-                    tooltip=folium.features.GeoJsonTooltip(
-                        fields=columns_view,
-                        aliases=columns_view, 
-                        localize=True,
-                        sticky=False,
-                        labels=True,
-                        style="""
-                            background-color: #F0EFEF;
-                            border: 2px solid black;
-                            border-radius: 3px;
-                            box-shadow: 3px;
-                        """,
-                        max_width=800,),
-                        highlight_function=lambda x: {'weight':3,'fillColor':'grey'},
-                        ).add_to(map)   
+
+    map = geodf.explore(
+        location=[40,23],
+        zoom_start=6,
+        tiles=None,
+        column="Πληθυσμός",  # make choropleth based on "BoroName" column
+        scheme="naturalbreaks",  # use mapclassify's natural breaks scheme
+        tooltip=columns_view,
+        popup=columns_view,
+        cmap="Greens",
+        legend=True, # show legend
+        k=10, # use 10 bins
+        legend_kwds=dict(colorbar=False), # do not use colorbar
+        name="periferiakes enotites", # name of the layer in the map
+        show=False
+    )
+
+
+
+
+
+
+
+
+
+
+    # choropleth = folium.Choropleth(
+    #     geo_data=geodf,
+    #     data=geodf,
+    #     columns=('per_enotita','Πληθυσμός'),
+    #     key_on='properties.LEKTIKO',
+    #     line_opacity=0.8,
+    #     highlight=True
+    # )
+    # choropleth.add_to(map)
+
+    # folium.features.GeoJson(
+    #                 data=geodf,
+    #                 name='New Cases Past 7 days (Per 100K Population)',
+    #                 smooth_factor=2,
+    #                 style_function=lambda x: {'color':'black','fillColor':'transparent','weight':0.5},
+    #                 tooltip=folium.features.GeoJsonTooltip(
+    #                     fields=columns_view,
+    #                     aliases=columns_view, 
+    #                     localize=True,
+    #                     sticky=False,
+    #                     labels=True,
+    #                     style="""
+    #                         background-color: #F0EFEF;
+    #                         border: 2px solid black;
+    #                         border-radius: 3px;
+    #                         box-shadow: 3px;
+    #                     """,
+    #                     max_width=800,),
+    #                     highlight_function=lambda x: {'weight':3,'fillColor':'grey'},
+    #                     ).add_to(map)   
     # st_map = st_folium(map, width=700, height=450)
 
     # st_map2=st_folium(st_map)
