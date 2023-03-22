@@ -164,13 +164,13 @@ APP_SUB_TITLE = 'Source: Federal Trade Commission'
 
 
 
-def display_map(map_data3,geodf):
-    st.write(map_data3)
+def display_map(geodf):
+    st.write(geodf)
     map = folium.Map(location=[38, -96.5], zoom_start=4, scrollWheelZoom=False, tiles='CartoDB positron')
     
     choropleth = folium.Choropleth(
         geo_data=geodf,
-        data=map_data3,
+        data=geodf,
         columns=('per_enotita','Πληθυσμός'),
         key_on='properties.LEKTIKO',
         line_opacity=0.8,
@@ -198,14 +198,14 @@ def main():
     #Load Data
     # df_continental = pd.read_csv('AxS-Continental_Full Data_data.csv')
     # geodf=geopandas.read_file('testgeo.geojson')
-    geojson_url="https://raw.githubusercontent.com/michalis-raptakis/greece-region-units-geojson/master/greece-region-units-geojson.json"
-    geodf = geopandas.read_file(geojson_url)
+    # geojson_url="https://raw.githubusercontent.com/michalis-raptakis/greece-region-units-geojson/master/greece-region-units-geojson.json"
+    geodf = geopandas.read_file('testgeo.geojson')
 
-    map_data3= pd.read_excel('komgeodata.xlsx',dtype={'KALCODE':str})
+    # map_data3= pd.read_excel('komgeodata.xlsx',dtype={'KALCODE':str})
 
     #Display Filters and Map
     # year, quarter = display_time_filters(df_continental)
-    state_name = display_map(map_data3,geodf)
+    state_name = display_map(geodf)
 
 
     #Display Metrics
