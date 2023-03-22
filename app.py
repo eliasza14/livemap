@@ -294,7 +294,7 @@ def main():
     # state_name = display_map(geodf,columns_view)
     html=display_map(geodf,geodf2,columns_view,columns_view2)
     # st.markdown(html, unsafe_allow_html=True)
-    st.components.v1.html(html)
+    st.components.v1.html(html,height=1024,width=768)
 
     # st.markdown(show_map(), unsafe_allow_html=True)
 
