@@ -4,6 +4,7 @@ import pandas as pd
 import requests
 import geopandas 
 import shapely.geometry
+from streamlit_folium import st_folium
 
 st.write("Live Map Komy")
 

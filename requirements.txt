@@ -17,7 +17,9 @@ geopandas
 # palettable
 # plotly
 # streamlit-bokeh-events
-streamlit-folium
+# streamlit-folium
+streamlit_folium==0.6.13
+
 # streamlit-keplergl
 # pip
 # tropycal
