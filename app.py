@@ -166,7 +166,7 @@ APP_SUB_TITLE = 'Source: Federal Trade Commission'
 
 
 @st.cache()
-def display_map(geodf,columns_view):
+def display_map(geodf,geodf2,columns_view,columns_view2):
     # st.write(geodf)
     # map = folium.Map(location=[40, 23], zoom_start=6, scrollWheelZoom=False, tiles='CartoDB positron')
     
@@ -191,6 +191,28 @@ def display_map(geodf,columns_view):
 
 
 
+    geodf2.explore(
+        m=map, # pass the map object
+        location=[40,23],
+        column="Πληθυσμός",  # make choropleth based on "BoroName" column
+        scheme="naturalbreaks",  # use mapclassify's natural breaks scheme
+        tooltip=columns_view2,
+        popup=columns_view2,
+        legend=True,
+        cmap="Blues",
+        k=5, # use 10 bins
+        legend_kwds=dict(colorbar=False), # do not use colorbar
+    #     legend_kwds = dict({"loc":"lower right"}),
+    #      color="red", # use red color on all points
+    #      marker_kwds=dict(radius=10, fill=True), # make marker radius 10px with fill
+    #      tooltip="PER", # show "name" column in the tooltip
+    #      tooltip_kwds=dict(labels=False), # do not show column label in the tooltip
+        name="periferies",
+        show=False# name of the layer in the map
+    )
+
+    folium.TileLayer('Cartodb Positron', overlay=False, control=True).add_to(map)  # use folium to add alternative tiles
+    folium.LayerControl(collapsed=False).add_to(map)
 
 
 
@@ -252,6 +274,7 @@ def main():
     # geodf=geopandas.read_file('testgeo.geojson')
     # geojson_url="https://raw.githubusercontent.com/michalis-raptakis/greece-region-units-geojson/master/greece-region-units-geojson.json"
     geodf = geopandas.read_file('testgeo.geojson')
+    geodf2 = geopandas.read_file('testgeo2.geojson')
 
     # map_data3= pd.read_excel('komgeodata.xlsx',dtype={'KALCODE':str})
 
@@ -263,9 +286,13 @@ def main():
        'Νοσηλευτές που πραγματοποιούν μοριακά τεστ',
        'Επαγγελματίες υγείας που πραγματοποιούν μοριακά τεστ και εμβολιάζουν','Οδηγοί']
     
-    
+    columns_view2=['Περιφέρεια','Πληθυσμός', 'ΚΟΜΥ', 'Νοσηλευτές και λοιποί επαγγελματίες υγείας',
+       'Νοσηλευτές και λοιποί επαγγελματίες υγείας που εμβολιάζουν',
+       'Λοιποί επαγγελματίες υγείας που δεν εμβολιάζουν', 'Ιατροί/Βιολόγοι που πραγματοποιούν μοριακά τεστ',
+       'Νοσηλευτές που πραγματοποιούν μοριακά τεστ',
+       'Επαγγελματίες υγείας που πραγματοποιούν μοριακά τεστ και εμβολιάζουν','Οδηγοί']
     # state_name = display_map(geodf,columns_view)
-    html=display_map(geodf,columns_view)
+    html=display_map(geodf,geodf2,columns_view,columns_view2)
     # st.markdown(html, unsafe_allow_html=True)
     st.components.v1.html(html)
 
