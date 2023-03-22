@@ -68,7 +68,7 @@ APP_SUB_TITLE = 'Source: Federal Trade Commission'
 #     return st.sidebar.radio('Report Type', ['Fraud', 'Other'])
 
 def display_map(df):
-
+    st.write("inside display map")
     map = folium.Map(location=[38, -96.5], zoom_start=4, scrollWheelZoom=False, tiles='CartoDB positron')
     
     choropleth = folium.Choropleth(
@@ -93,7 +93,7 @@ def display_map(df):
     # )
     
     st_map = st_folium(map, width=700, height=450)
-
+    
     # state_name = ''
     # if st_map['last_active_drawing']:
     #     state_name = st_map['last_active_drawing']['properties']['name']
