@@ -219,8 +219,7 @@ def main():
     st.set_page_config(APP_TITLE)
     st.title(APP_TITLE)
     st.caption(APP_SUB_TITLE)
-    html_code = "<h1>Hello, Streamlit!</h1>"
-    st.components.v1.html(html_code)
+    # html_code = "<h1>Hello, Streamlit!</h1>"
     #Load Data
     # df_continental = pd.read_csv('AxS-Continental_Full Data_data.csv')
     # geodf=geopandas.read_file('testgeo.geojson')
@@ -239,9 +238,11 @@ def main():
     
     
     # state_name = display_map(geodf,columns_view)
-    # html=display_map(geodf,columns_view)
+    html=display_map(geodf,columns_view)
     # st.markdown(html, unsafe_allow_html=True)
-    st.markdown(show_map(), unsafe_allow_html=True)
+    st.components.v1.html(html)
+
+    # st.markdown(show_map(), unsafe_allow_html=True)
 
     #Display Metrics
     # st.subheader(f'{state_name} Facts')
