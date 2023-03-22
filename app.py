@@ -10,3 +10,21 @@ st.write("Live Map Komy")
 
 geodf = geopandas.read_file('testgeo.geojson')
 st.write(geodf)
+
+m = geodf.explore(
+     location=[40,23],
+     zoom_start=6,
+     tiles=None,
+     column="Πληθυσμός",  # make choropleth based on "BoroName" column
+     scheme="naturalbreaks",  # use mapclassify's natural breaks scheme
+     tooltip=columns_view,
+     popup=columns_view,
+     cmap="Greens",
+     legend=True, # show legend
+     k=10, # use 10 bins
+     legend_kwds=dict(colorbar=False), # do not use colorbar
+    name="periferiakes enotites", # name of the layer in the map
+    show=False
+)
+
+st_map=st_folium(m)
