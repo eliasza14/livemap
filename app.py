@@ -183,7 +183,7 @@ def display_map(df, year, quarter):
     map = folium.Map(location=[38, -96.5], zoom_start=4, scrollWheelZoom=False, tiles='CartoDB positron')
     
     choropleth = folium.Choropleth(
-        geo_data='data/us-state-boundaries.geojson',
+        geo_data='us-state-boundaries.geojson',
         data=df,
         columns=('State Name', 'State Total Reports Quarter'),
         key_on='feature.properties.name',
@@ -227,10 +227,10 @@ def main():
     st.caption(APP_SUB_TITLE)
 
     #Load Data
-    df_continental = pd.read_csv('data/AxS-Continental_Full Data_data.csv')
-    df_fraud = pd.read_csv('data/AxS-Fraud Box_Full Data_data.csv')
-    df_median = pd.read_csv('data/AxS-Median Box_Full Data_data.csv')
-    df_loss = pd.read_csv('data/AxS-Losses Box_Full Data_data.csv')
+    df_continental = pd.read_csv('AxS-Continental_Full Data_data.csv')
+    df_fraud = pd.read_csv('AxS-Fraud Box_Full Data_data.csv')
+    df_median = pd.read_csv('AxS-Median Box_Full Data_data.csv')
+    df_loss = pd.read_csv('AxS-Losses Box_Full Data_data.csv')
 
     #Display Filters and Map
     year, quarter = display_time_filters(df_continental)
