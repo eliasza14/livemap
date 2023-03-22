@@ -184,8 +184,8 @@ def display_map(map_data3,geodf):
 
     # st_map2=st_folium(st_map)
     state_name = ''
-    # if st_map['last_active_drawing']:
-    #     state_name = st_map['last_active_drawing']['properties']['per_enotita']
+    if st_map['last_active_drawing']:
+        state_name = st_map['last_active_drawing']['properties']['LEKTIKO']
     return state_name
 
 
