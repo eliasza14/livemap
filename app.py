@@ -9,14 +9,22 @@ from streamlit_folium import st_folium
 st.write("Live Map Komy")
 
 
-geodf = geopandas.read_file('testgeo.geojson')
-st.write(geodf)
+@st.experimental_memo
+def get_data(geojson):
+    
+    geodf=geopandas.read_file(geojson)
+    return geodf
+
+geodata =get_data('testgeo.geojson')
+
+# geodf = geopandas.read_file('testgeo.geojson')
+st.write(geodata)
 columns_view=['Περιφερειακή Ενότητα','Πληθυσμός', 'ΚΟΜΥ', 'Νοσηλευτές και λοιποί επαγγελματίες υγείας',
        'Νοσηλευτές και λοιποί επαγγελματίες υγείας που εμβολιάζουν',
        'Λοιποί επαγγελματίες υγείας που δεν εμβολιάζουν', 'Ιατροί/Βιολόγοι που πραγματοποιούν μοριακά τεστ',
        'Νοσηλευτές που πραγματοποιούν μοριακά τεστ',
        'Επαγγελματίες υγείας που πραγματοποιούν μοριακά τεστ και εμβολιάζουν','Οδηγοί']
-m = geodf.explore(
+m = geodata.explore(
      location=[40,23],
      zoom_start=6,
      tiles=None,
