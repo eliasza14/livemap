@@ -157,6 +157,7 @@ import pandas as pd
 import folium
 from streamlit_folium import st_folium
 import geopandas 
+from folium.features import GeoJsonTooltip
 
 
 APP_TITLE = 'Fraud and Identity Theft Report'
@@ -164,9 +165,9 @@ APP_SUB_TITLE = 'Source: Federal Trade Commission'
 
 
 
-def display_map(geodf):
+def display_map(geodf,columns_view):
     st.write(geodf)
-    map = folium.Map(location=[38, -96.5], zoom_start=4, scrollWheelZoom=False, tiles='CartoDB positron')
+    map = folium.Map(location=[40, 23], zoom_start=6, scrollWheelZoom=False, tiles='CartoDB positron')
     
     choropleth = folium.Choropleth(
         geo_data=geodf,
@@ -178,7 +179,26 @@ def display_map(geodf):
     )
     choropleth.add_to(map)
 
-   
+    folium.features.GeoJson(
+                    data=merge,
+                    name='New Cases Past 7 days (Per 100K Population)',
+                    smooth_factor=2,
+                    style_function=lambda x: {'color':'black','fillColor':'transparent','weight':0.5},
+                    tooltip=folium.features.GeoJsonTooltip(
+                        fields=columns_view,
+                        aliases=columns_view, 
+                        localize=True,
+                        sticky=False,
+                        labels=True,
+                        style="""
+                            background-color: #F0EFEF;
+                            border: 2px solid black;
+                            border-radius: 3px;
+                            box-shadow: 3px;
+                        """,
+                        max_width=800,),
+                        highlight_function=lambda x: {'weight':3,'fillColor':'grey'},
+                        ).add_to(map)   
     
     st_map = st_folium(map, width=700, height=450)
 
@@ -205,7 +225,12 @@ def main():
 
     #Display Filters and Map
     # year, quarter = display_time_filters(df_continental)
-    state_name = display_map(geodf)
+    columns_view=['Περιφερειακή Ενότητα','Πληθυσμός', 'ΚΟΜΥ', 'Νοσηλευτές και λοιποί επαγγελματίες υγείας',
+       'Νοσηλευτές και λοιποί επαγγελματίες υγείας που εμβολιάζουν',
+       'Λοιποί επαγγελματίες υγείας που δεν εμβολιάζουν', 'Ιατροί/Βιολόγοι που πραγματοποιούν μοριακά τεστ',
+       'Νοσηλευτές που πραγματοποιούν μοριακά τεστ',
+       'Επαγγελματίες υγείας που πραγματοποιούν μοριακά τεστ και εμβολιάζουν','Οδηγοί']
+    state_name = display_map(geodf,columns_view)
 
 
     #Display Metrics
