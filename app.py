@@ -210,6 +210,10 @@ def display_map(geodf,columns_view):
     # return state_name
 
 
+@st.cache
+def show_map():
+    m = folium.Map(location=[45.5236, -122.6750])
+    return m._repr_html_()
 
 def main():
     st.set_page_config(APP_TITLE)
@@ -220,7 +224,7 @@ def main():
     # df_continental = pd.read_csv('AxS-Continental_Full Data_data.csv')
     # geodf=geopandas.read_file('testgeo.geojson')
     # geojson_url="https://raw.githubusercontent.com/michalis-raptakis/greece-region-units-geojson/master/greece-region-units-geojson.json"
-    geodf = geopandas.read_file('testgeo.geojson')
+    # geodf = geopandas.read_file('testgeo.geojson')
 
     # map_data3= pd.read_excel('komgeodata.xlsx',dtype={'KALCODE':str})
 
@@ -234,8 +238,9 @@ def main():
     
     
     # state_name = display_map(geodf,columns_view)
-    html=display_map(geodf,columns_view)
-    st.markdown(html, unsafe_allow_html=True)
+    # html=display_map(geodf,columns_view)
+    # st.markdown(html, unsafe_allow_html=True)
+    st.markdown(show_map(), unsafe_allow_html=True)
 
     #Display Metrics
     # st.subheader(f'{state_name} Facts')
