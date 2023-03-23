@@ -269,6 +269,17 @@ def main():
     st.set_page_config(APP_TITLE)
     st.title(APP_TITLE)
     st.caption(APP_SUB_TITLE)
+    # Create a sidebar with two radio button options
+    option = st.sidebar.radio(
+        'Select an option:',
+        ('Option 1', 'Option 2')
+    )
+
+    # Display content based on the selected option
+    if option == 'Option 1':
+        st.write('You selected Option 1')
+    else:
+        st.write('You selected Option 2')
     # html_code = "<h1>Hello, Streamlit!</h1>"
     #Load Data
     # df_continental = pd.read_csv('AxS-Continental_Full Data_data.csv')
@@ -295,7 +306,7 @@ def main():
     # state_name = display_map(geodf,columns_view)
     html=display_map(geodf,geodf2,columns_view,columns_view2)
     # st.markdown(html, unsafe_allow_html=True)
-    st.components.v1.html(html,height=1024,width=768)
+    st.components.v1.html(html,width=1024,height=768)
 
     # st.markdown(show_map(), unsafe_allow_html=True)
 
