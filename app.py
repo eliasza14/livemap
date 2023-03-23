@@ -268,16 +268,17 @@ def show_map():
 
 
 @st.cache_data
-def fetch_and_clean_data(url):
+def fetch_and_clean_data(url,url2):
     # Fetch data from URL here, and then clean it up.
     data=geopandas.read_file(url)
-    return data
+    data2=geopandas.read_file(url2)
+    return data,data2
 
-@st.cache_data
-def fetch_and_clean_data2(url):
-    # Fetch data from URL here, and then clean it up.
-    data=geopandas.read_file(url)
-    return data
+# @st.cache_data
+# def fetch_and_clean_data2(url):
+#     # Fetch data from URL here, and then clean it up.
+#     data=geopandas.read_file(url)
+#     return data
 
 
 
@@ -285,7 +286,20 @@ def main():
     st.set_page_config(APP_TITLE)
     st.title(APP_TITLE)
     st.caption(APP_SUB_TITLE)
+    columns_view=['Περιφερειακή Ενότητα','Πληθυσμός', 'ΚΟΜΥ', 'Νοσηλευτές και λοιποί επαγγελματίες υγείας',
+    'Νοσηλευτές και λοιποί επαγγελματίες υγείας που εμβολιάζουν',
+    'Λοιποί επαγγελματίες υγείας που δεν εμβολιάζουν', 'Ιατροί/Βιολόγοι που πραγματοποιούν μοριακά τεστ',
+    'Νοσηλευτές που πραγματοποιούν μοριακά τεστ',
+    'Επαγγελματίες υγείας που πραγματοποιούν μοριακά τεστ και εμβολιάζουν','Οδηγοί']
+    
+    columns_view2=['Περιφέρεια','Πληθυσμός', 'ΚΟΜΥ', 'Νοσηλευτές και λοιποί επαγγελματίες υγείας',
+    'Νοσηλευτές και λοιποί επαγγελματίες υγείας που εμβολιάζουν',
+    'Λοιποί επαγγελματίες υγείας που δεν εμβολιάζουν', 'Ιατροί/Βιολόγοι που πραγματοποιούν μοριακά τεστ',
+    'Νοσηλευτές που πραγματοποιούν μοριακά τεστ',
+    'Επαγγελματίες υγείας που πραγματοποιούν μοριακά τεστ και εμβολιάζουν','Οδηγοί']
     # Create a sidebar with two radio button options
+    geodf,geodf2 = fetch_and_clean_data('testgeo.geojson','testgeo2.geojson')
+
     option = st.sidebar.radio(
         'Select an option:',
         ('Option 1', 'Option 2')
@@ -295,6 +309,11 @@ def main():
     # Display content based on the selected option
     if option == 'Option 1':
         st.write('You selected Option 1')
+
+        # state_name = display_map(geodf,columns_view)
+        html=display_map(geodf,geodf2,columns_view,columns_view2)
+        # st.markdown(html, unsafe_allow_html=True)
+        st.components.v1.html(html,width=1024,height=768)
     else:
         st.write('You selected Option 2')
     # html_code = "<h1>Hello, Streamlit!</h1>"
@@ -304,8 +323,7 @@ def main():
     # geojson_url="https://raw.githubusercontent.com/michalis-raptakis/greece-region-units-geojson/master/greece-region-units-geojson.json"
     # geodf = geopandas.read_file('testgeo.geojson')
 
-    geodf = fetch_and_clean_data('testgeo.geojson')
-    geodf2 = fetch_and_clean_data2('testgeo2.geojson')
+    # geodf2 = fetch_and_clean_data2('testgeo2.geojson')
 
 
     # geodf2 = geopandas.read_file('testgeo2.geojson')
@@ -314,21 +332,7 @@ def main():
 
     #Display Filters and Map
     # year, quarter = display_time_filters(df_continental)
-    columns_view=['Περιφερειακή Ενότητα','Πληθυσμός', 'ΚΟΜΥ', 'Νοσηλευτές και λοιποί επαγγελματίες υγείας',
-       'Νοσηλευτές και λοιποί επαγγελματίες υγείας που εμβολιάζουν',
-       'Λοιποί επαγγελματίες υγείας που δεν εμβολιάζουν', 'Ιατροί/Βιολόγοι που πραγματοποιούν μοριακά τεστ',
-       'Νοσηλευτές που πραγματοποιούν μοριακά τεστ',
-       'Επαγγελματίες υγείας που πραγματοποιούν μοριακά τεστ και εμβολιάζουν','Οδηγοί']
-    
-    columns_view2=['Περιφέρεια','Πληθυσμός', 'ΚΟΜΥ', 'Νοσηλευτές και λοιποί επαγγελματίες υγείας',
-       'Νοσηλευτές και λοιποί επαγγελματίες υγείας που εμβολιάζουν',
-       'Λοιποί επαγγελματίες υγείας που δεν εμβολιάζουν', 'Ιατροί/Βιολόγοι που πραγματοποιούν μοριακά τεστ',
-       'Νοσηλευτές που πραγματοποιούν μοριακά τεστ',
-       'Επαγγελματίες υγείας που πραγματοποιούν μοριακά τεστ και εμβολιάζουν','Οδηγοί']
-    # state_name = display_map(geodf,columns_view)
-    html=display_map(geodf,geodf2,columns_view,columns_view2)
-    # st.markdown(html, unsafe_allow_html=True)
-    st.components.v1.html(html,width=1024,height=768)
+
 
     # st.markdown(show_map(), unsafe_allow_html=True)
 
