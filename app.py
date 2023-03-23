@@ -162,8 +162,8 @@ import  streamlit.components.v1
 from folium.plugins import Fullscreen
 
 
-APP_TITLE = 'Fraud and Identity Theft Report'
-APP_SUB_TITLE = 'Source: Federal Trade Commission'
+APP_TITLE = 'Κ.Ο.Μ.Υ. Χάρτης'
+APP_SUB_TITLE = 'by CMT Prooptiki'
 
 
 @st.cache()
