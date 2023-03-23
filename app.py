@@ -265,6 +265,22 @@ def show_map():
     m = folium.Map(location=[45.5236, -122.6750])
     return m._repr_html_()
 
+
+
+@st.cache_data
+def fetch_and_clean_data(url):
+    # Fetch data from URL here, and then clean it up.
+    data=geopandas.read_file(url)
+    return data
+
+@st.cache_data
+def fetch_and_clean_data2(url):
+    # Fetch data from URL here, and then clean it up.
+    data=geopandas.read_file(url)
+    return data
+
+
+
 def main():
     st.set_page_config(APP_TITLE)
     st.title(APP_TITLE)
@@ -274,6 +290,7 @@ def main():
         'Select an option:',
         ('Option 1', 'Option 2')
     )
+
 
     # Display content based on the selected option
     if option == 'Option 1':
@@ -285,8 +302,13 @@ def main():
     # df_continental = pd.read_csv('AxS-Continental_Full Data_data.csv')
     # geodf=geopandas.read_file('testgeo.geojson')
     # geojson_url="https://raw.githubusercontent.com/michalis-raptakis/greece-region-units-geojson/master/greece-region-units-geojson.json"
-    geodf = geopandas.read_file('testgeo.geojson')
-    geodf2 = geopandas.read_file('testgeo2.geojson')
+    # geodf = geopandas.read_file('testgeo.geojson')
+
+    geodf = fetch_and_clean_data('testgeo.geojson')
+    geodf2 = fetch_and_clean_data2('testgeo2.geojson')
+
+
+    # geodf2 = geopandas.read_file('testgeo2.geojson')
 
     # map_data3= pd.read_excel('komgeodata.xlsx',dtype={'KALCODE':str})
 
