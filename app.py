@@ -159,6 +159,7 @@ from streamlit_folium import st_folium
 import geopandas 
 from folium.features import GeoJsonTooltip
 import  streamlit.components.v1 
+from folium.plugins import Fullscreen
 
 
 APP_TITLE = 'Fraud and Identity Theft Report'
@@ -213,7 +214,7 @@ def display_map(geodf,geodf2,columns_view,columns_view2):
 
     folium.TileLayer('Cartodb Positron', overlay=False, control=True).add_to(map)  # use folium to add alternative tiles
     folium.LayerControl(collapsed=False).add_to(map)
-
+    Fullscreen().add_to(map)
 
 
 
