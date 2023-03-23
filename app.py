@@ -167,13 +167,13 @@ APP_SUB_TITLE = 'by CMT Prooptiki'
 
 
 @st.cache()
-def display_map1(geodata,columns_view,tilename,color):
+def display_map(geodf,geodf2,columns_view,columns_view2):
     # st.write(geodf)
     # map = folium.Map(location=[40, 23], zoom_start=6, scrollWheelZoom=False, tiles='CartoDB positron')
     
 
 
-    map = geodata.explore(
+    map = geodf.explore(
         location=[40,23],
         zoom_start=6,
         tiles=None,
@@ -181,50 +181,40 @@ def display_map1(geodata,columns_view,tilename,color):
         scheme="naturalbreaks",  # use mapclassify's natural breaks scheme
         tooltip=columns_view,
         popup=columns_view,
-        cmap=color,
+        cmap="Greens",
         legend=True, # show legend
         k=10, # use 10 bins
         legend_kwds=dict(colorbar=False), # do not use colorbar
-        name=tilename, # name of the layer in the map
+        name="periferiakes enotites", # name of the layer in the map
         show=False
     )
 
 
 
 
+    geodf2.explore(
+        m=map, # pass the map object
+        location=[40,23],
+        column="Πληθυσμός",  # make choropleth based on "BoroName" column
+        scheme="naturalbreaks",  # use mapclassify's natural breaks scheme
+        tooltip=columns_view2,
+        popup=columns_view2,
+        legend=True,
+        cmap="Blues",
+        k=5, # use 10 bins
+        legend_kwds=dict(colorbar=False), # do not use colorbar
+    #     legend_kwds = dict({"loc":"lower right"}),
+    #      color="red", # use red color on all points
+    #      marker_kwds=dict(radius=10, fill=True), # make marker radius 10px with fill
+    #      tooltip="PER", # show "name" column in the tooltip
+    #      tooltip_kwds=dict(labels=False), # do not show column label in the tooltip
+        name="periferies",
+        show=False# name of the layer in the map
+    )
+
     folium.TileLayer('Cartodb Positron', overlay=False, control=True).add_to(map)  # use folium to add alternative tiles
     folium.LayerControl(collapsed=False).add_to(map)
     Fullscreen().add_to(map)
-
-    return map._repr_html_()
-
-# @st.cache()
-# def display_map2(geodf2,columns_view2):
-    
-
-#     map=geodf2.explore(
-#         location=[40,23],
-#         column="Πληθυσμός",  # make choropleth based on "BoroName" column
-#         scheme="naturalbreaks",  # use mapclassify's natural breaks scheme
-#         tooltip=columns_view2,
-#         popup=columns_view2,
-#         legend=True,
-#         cmap="Blues",
-#         k=5, # use 10 bins
-#         legend_kwds=dict(colorbar=False), # do not use colorbar
-#     #     legend_kwds = dict({"loc":"lower right"}),
-#     #      color="red", # use red color on all points
-#     #      marker_kwds=dict(radius=10, fill=True), # make marker radius 10px with fill
-#     #      tooltip="PER", # show "name" column in the tooltip
-#     #      tooltip_kwds=dict(labels=False), # do not show column label in the tooltip
-#         name="periferies",
-#         show=False# name of the layer in the map
-#     )
-#     folium.TileLayer('Cartodb Positron', overlay=False, control=True).add_to(map)  # use folium to add alternative tiles
-#     folium.LayerControl(collapsed=False).add_to(map)
-#     Fullscreen().add_to(map)
-
-#     return map._repr_html_()
 
 
 
@@ -266,6 +256,7 @@ def display_map1(geodata,columns_view,tilename,color):
     # state_name = ''
     # if st_map['last_active_drawing']:
     #     state_name = st_map['last_active_drawing']['properties']['LEKTIKO']
+    return map._repr_html_()
     # return state_name
 
 
@@ -274,78 +265,37 @@ def show_map():
     m = folium.Map(location=[45.5236, -122.6750])
     return m._repr_html_()
 
-
-
-@st.cache_data
-def fetch_and_clean_data(url,url2):
-    # Fetch data from URL here, and then clean it up.
-    data=geopandas.read_file(url)
-    data2=geopandas.read_file(url2)
-    return data,data2
-
-# @st.cache_data
-# def fetch_and_clean_data2(url):
-#     # Fetch data from URL here, and then clean it up.
-#     data=geopandas.read_file(url)
-#     return data
-
-geodf,geodf2 = fetch_and_clean_data('testgeo.geojson','testgeo2.geojson')
-
 def main():
     st.set_page_config(APP_TITLE)
     st.title(APP_TITLE)
     st.caption(APP_SUB_TITLE)
-    columns_view=['Περιφερειακή Ενότητα','Πληθυσμός', 'ΚΟΜΥ', 'Νοσηλευτές και λοιποί επαγγελματίες υγείας',
-    'Νοσηλευτές και λοιποί επαγγελματίες υγείας που εμβολιάζουν',
-    'Λοιποί επαγγελματίες υγείας που δεν εμβολιάζουν', 'Ιατροί/Βιολόγοι που πραγματοποιούν μοριακά τεστ',
-    'Νοσηλευτές που πραγματοποιούν μοριακά τεστ',
-    'Επαγγελματίες υγείας που πραγματοποιούν μοριακά τεστ και εμβολιάζουν','Οδηγοί']
-    
-    columns_view2=['Περιφέρεια','Πληθυσμός', 'ΚΟΜΥ', 'Νοσηλευτές και λοιποί επαγγελματίες υγείας',
-    'Νοσηλευτές και λοιποί επαγγελματίες υγείας που εμβολιάζουν',
-    'Λοιποί επαγγελματίες υγείας που δεν εμβολιάζουν', 'Ιατροί/Βιολόγοι που πραγματοποιούν μοριακά τεστ',
-    'Νοσηλευτές που πραγματοποιούν μοριακά τεστ',
-    'Επαγγελματίες υγείας που πραγματοποιούν μοριακά τεστ και εμβολιάζουν','Οδηγοί']
-    # Create a sidebar with two radio button options
-    
-
-    option = st.sidebar.radio(
-        'Select an option:',
-        ('Option 1', 'Option 2')
-    )
-
-
-    # Display content based on the selected option
-    if option == 'Option 1':
-        st.write('You selected Option 1')
-
-        # state_name = display_map(geodf,columns_view)
-        html=display_map1(geodf,columns_view,"periferiakes enotites","Greens")
-        # st.markdown(html, unsafe_allow_html=True)
-        st.components.v1.html(html,width=1024,height=768)
-    else:
-        st.write('You selected Option 2')
-        html=display_map1(geodf2,columns_view2,"periferies","Blues")
-
-        st.components.v1.html(html,width=1024,height=768)    # html_code = "<h1>Hello, Streamlit!</h1>"
-
     # html_code = "<h1>Hello, Streamlit!</h1>"
     #Load Data
     # df_continental = pd.read_csv('AxS-Continental_Full Data_data.csv')
     # geodf=geopandas.read_file('testgeo.geojson')
     # geojson_url="https://raw.githubusercontent.com/michalis-raptakis/greece-region-units-geojson/master/greece-region-units-geojson.json"
-    # geodf = geopandas.read_file('testgeo.geojson')
-
-    # geodf2 = fetch_and_clean_data2('testgeo2.geojson')
-
-
-    # geodf2 = geopandas.read_file('testgeo2.geojson')
+    geodf = geopandas.read_file('testgeo.geojson')
+    geodf2 = geopandas.read_file('testgeo2.geojson')
 
     # map_data3= pd.read_excel('komgeodata.xlsx',dtype={'KALCODE':str})
 
     #Display Filters and Map
     # year, quarter = display_time_filters(df_continental)
-
+    columns_view=['Περιφερειακή Ενότητα','Πληθυσμός', 'ΚΟΜΥ', 'Νοσηλευτές και λοιποί επαγγελματίες υγείας',
+       'Νοσηλευτές και λοιποί επαγγελματίες υγείας που εμβολιάζουν',
+       'Λοιποί επαγγελματίες υγείας που δεν εμβολιάζουν', 'Ιατροί/Βιολόγοι που πραγματοποιούν μοριακά τεστ',
+       'Νοσηλευτές που πραγματοποιούν μοριακά τεστ',
+       'Επαγγελματίες υγείας που πραγματοποιούν μοριακά τεστ και εμβολιάζουν','Οδηγοί']
+    
+    columns_view2=['Περιφέρεια','Πληθυσμός', 'ΚΟΜΥ', 'Νοσηλευτές και λοιποί επαγγελματίες υγείας',
+       'Νοσηλευτές και λοιποί επαγγελματίες υγείας που εμβολιάζουν',
+       'Λοιποί επαγγελματίες υγείας που δεν εμβολιάζουν', 'Ιατροί/Βιολόγοι που πραγματοποιούν μοριακά τεστ',
+       'Νοσηλευτές που πραγματοποιούν μοριακά τεστ',
+       'Επαγγελματίες υγείας που πραγματοποιούν μοριακά τεστ και εμβολιάζουν','Οδηγοί']
+    # state_name = display_map(geodf,columns_view)
+    html=display_map(geodf,geodf2,columns_view,columns_view2)
+    # st.markdown(html, unsafe_allow_html=True)
+    st.components.v1.html(html,width=1024,height=768)
 
     # st.markdown(show_map(), unsafe_allow_html=True)
 
