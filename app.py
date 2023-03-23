@@ -173,7 +173,7 @@ def display_map1(geodata,columns_view,tilename,color):
     
 
 
-    map = geodf.explore(
+    map = geodata.explore(
         location=[40,23],
         zoom_start=6,
         tiles=None,
