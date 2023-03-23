@@ -320,7 +320,7 @@ def main():
         st.write('You selected Option 1')
 
         # state_name = display_map(geodf,columns_view)
-        html=display_map(geodf,columns_view)
+        html=display_map1(geodf,columns_view)
         # st.markdown(html, unsafe_allow_html=True)
         st.components.v1.html(html,width=1024,height=768)
     else:
