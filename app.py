@@ -167,7 +167,7 @@ APP_SUB_TITLE = 'by CMT Prooptiki'
 
 
 @st.cache()
-def display_map(geodf,geodf2,columns_view,columns_view2):
+def display_map1(geodf,columns_view):
     # st.write(geodf)
     # map = folium.Map(location=[40, 23], zoom_start=6, scrollWheelZoom=False, tiles='CartoDB positron')
     
@@ -192,8 +192,17 @@ def display_map(geodf,geodf2,columns_view,columns_view2):
 
 
 
-    geodf2.explore(
-        m=map, # pass the map object
+    folium.TileLayer('Cartodb Positron', overlay=False, control=True).add_to(map)  # use folium to add alternative tiles
+    folium.LayerControl(collapsed=False).add_to(map)
+    Fullscreen().add_to(map)
+
+    return map._repr_html_()
+
+@st.cache()
+def display_map2(geodf2,columns_view2):
+    
+
+    map=geodf2.explore(
         location=[40,23],
         column="Πληθυσμός",  # make choropleth based on "BoroName" column
         scheme="naturalbreaks",  # use mapclassify's natural breaks scheme
@@ -211,10 +220,11 @@ def display_map(geodf,geodf2,columns_view,columns_view2):
         name="periferies",
         show=False# name of the layer in the map
     )
-
     folium.TileLayer('Cartodb Positron', overlay=False, control=True).add_to(map)  # use folium to add alternative tiles
     folium.LayerControl(collapsed=False).add_to(map)
     Fullscreen().add_to(map)
+
+    return map._repr_html_()
 
 
 
@@ -256,7 +266,6 @@ def display_map(geodf,geodf2,columns_view,columns_view2):
     # state_name = ''
     # if st_map['last_active_drawing']:
     #     state_name = st_map['last_active_drawing']['properties']['LEKTIKO']
-    return map._repr_html_()
     # return state_name
 
 
@@ -311,11 +320,15 @@ def main():
         st.write('You selected Option 1')
 
         # state_name = display_map(geodf,columns_view)
-        html=display_map(geodf,geodf2,columns_view,columns_view2)
+        html=display_map(geodf,columns_view)
         # st.markdown(html, unsafe_allow_html=True)
         st.components.v1.html(html,width=1024,height=768)
     else:
         st.write('You selected Option 2')
+        html=display_map2(geodf2,columns_view2)
+
+        st.components.v1.html(html,width=1024,height=768)    # html_code = "<h1>Hello, Streamlit!</h1>"
+
     # html_code = "<h1>Hello, Streamlit!</h1>"
     #Load Data
     # df_continental = pd.read_csv('AxS-Continental_Full Data_data.csv')
