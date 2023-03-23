@@ -289,7 +289,7 @@ def fetch_and_clean_data(url,url2):
 #     data=geopandas.read_file(url)
 #     return data
 
-
+geodf,geodf2 = fetch_and_clean_data('testgeo.geojson','testgeo2.geojson')
 
 def main():
     st.set_page_config(APP_TITLE)
@@ -307,7 +307,7 @@ def main():
     'Νοσηλευτές που πραγματοποιούν μοριακά τεστ',
     'Επαγγελματίες υγείας που πραγματοποιούν μοριακά τεστ και εμβολιάζουν','Οδηγοί']
     # Create a sidebar with two radio button options
-    geodf,geodf2 = fetch_and_clean_data('testgeo.geojson','testgeo2.geojson')
+    
 
     option = st.sidebar.radio(
         'Select an option:',
