@@ -277,10 +277,10 @@ def display_map(geodf,geodf2,columns_view,columns_view2):
 
 
 @st.cache
-# def show_map():
-#     m = folium.Map(location=[45.5236, -122.6750])
+def show_map():
+    m = folium.Map(location=[45.5236, -122.6750])
 
-#     return m._repr_html_()
+    return m._repr_html_()
 
 def main():
     st.set_page_config(APP_TITLE)
