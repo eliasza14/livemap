@@ -188,7 +188,23 @@ def display_map(geodf,geodf2,columns_view,columns_view2):
         name="periferiakes enotites", # name of the layer in the map
         show=False
     )
+    # Add the event listener to the map
+    geodf.add_child(folium.plugins.Fullscreen(
+        position="topright",
+        title="Fullscreen",
+        title_cancel="Exit fullscreen",
+        force_separate_button=True
+    ))
 
+    # Define a function that will re-render the legend when the fullscreen mode changes
+    def on_fullscreen_changed(event):
+        if event.fullscreen:
+            geodf.get_root().html.add_child(folium.Element(geodf.get_name()))
+        else:
+            geodf.get_root().html.add_child(folium.Element(geodf.get_name()))
+
+    # Add the event listener to the map
+    geodf.add_listener('fullscreenchange', on_fullscreen_changed)
 
 
 
@@ -263,23 +279,7 @@ def display_map(geodf,geodf2,columns_view,columns_view2):
 @st.cache
 def show_map():
     m = folium.Map(location=[45.5236, -122.6750])
-    # Add the event listener to the map
-    m.add_child(folium.plugins.Fullscreen(
-        position="topright",
-        title="Fullscreen",
-        title_cancel="Exit fullscreen",
-        force_separate_button=True
-    ))
-
-    # Define a function that will re-render the legend when the fullscreen mode changes
-    def on_fullscreen_changed(event):
-        if event.fullscreen:
-            m.get_root().html.add_child(folium.Element(m.get_name()))
-        else:
-            m.get_root().html.add_child(folium.Element(m.get_name()))
-
-    # Add the event listener to the map
-    m.add_listener('fullscreenchange', on_fullscreen_changed)
+    
     return m._repr_html_()
 
 def main():
