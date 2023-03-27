@@ -162,7 +162,7 @@ import  streamlit.components.v1
 from folium.plugins import Fullscreen
 
 
-APP_TITLE = 'Κ.Ο.Μ.Υ. 2.0.3 Χάρτης'
+APP_TITLE = 'Κ.Ο.Μ.Υ. 2.0.4 Χάρτης'
 APP_SUB_TITLE = 'by CMT Prooptiki'
 
 
@@ -263,25 +263,25 @@ def display_map(geodf,geodf2,columns_view,columns_view2):
 @st.cache
 def show_map():
     m = folium.Map(location=[45.5236, -122.6750])
-
-    ##
     # Add the event listener to the map
     m.add_child(folium.plugins.Fullscreen(
-    position="topright",
-    title="Fullscreen",
-    title_cancel="Exit fullscreen",
-    force_separate_button=True
+        position="topright",
+        title="Fullscreen",
+        title_cancel="Exit fullscreen",
+        force_separate_button=True
     ))
-    ##
+
+    # Define a function that will re-render the legend when the fullscreen mode changes
     def on_fullscreen_changed(event):
         if event.fullscreen:
             m.get_root().html.add_child(folium.Element(m.get_name()))
         else:
-            m.get_root().html.add_child(folium.Element(m.get_name()))    
-        return m._repr_html_()
+            m.get_root().html.add_child(folium.Element(m.get_name()))
+
     # Add the event listener to the map
     m.add_listener('fullscreenchange', on_fullscreen_changed)
-    
+    return m._repr_html_()
+
 def main():
     st.set_page_config(APP_TITLE)
     st.title(APP_TITLE)
