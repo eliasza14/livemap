@@ -150,7 +150,7 @@
 # if __name__ == "__main__":
 #     main()
 
-
+#hello ilias
 
 import streamlit as st
 import pandas as pd
@@ -162,7 +162,7 @@ import  streamlit.components.v1
 from folium.plugins import Fullscreen
 
 
-APP_TITLE = 'Κ.Ο.Μ.Υ. Χάρτης'
+APP_TITLE = 'Κ.Ο.Μ.Υ. 2.0.1 Χάρτης'
 APP_SUB_TITLE = 'by CMT Prooptiki'
 
 
