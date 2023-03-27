@@ -312,8 +312,11 @@ def main():
     # df_continental = pd.read_csv('AxS-Continental_Full Data_data.csv')
     # geodf=geopandas.read_file('testgeo.geojson')
     # geojson_url="https://raw.githubusercontent.com/michalis-raptakis/greece-region-units-geojson/master/greece-region-units-geojson.json"
-    geodf = geopandas.read_file('testgeo.geojson')
-    geodf2 = geopandas.read_file('testgeo2.geojson')
+    #geodf = geopandas.read_file('testgeo.geojson')
+    #geodf2 = geopandas.read_file('testgeo2.geojson')
+
+    geodf = geopandas.read_file("https://github.com/A-PALIOS/livemap_backend/blob/main/testgeo1.geojson")
+    geodf2= geopandas.read_file("https://github.com/A-PALIOS/livemap_backend/blob/main/testgeo2.geojson")
 
     # map_data3= pd.read_excel('komgeodata.xlsx',dtype={'KALCODE':str})
 
