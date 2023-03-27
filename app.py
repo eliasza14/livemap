@@ -162,7 +162,7 @@ import  streamlit.components.v1
 from folium.plugins import Fullscreen
 
 
-APP_TITLE = 'Κ.Ο.Μ.Υ. 2.0.9 Χάρτης'
+APP_TITLE = 'Κ.Ο.Μ.Υ. 2.1.0 Χάρτης'
 APP_SUB_TITLE = 'by CMT Prooptiki'
 
 
@@ -232,7 +232,7 @@ def display_map(geodf,geodf2,columns_view,columns_view2):
             map.get_root().html.add_child(folium.Element(map.get_name()))
 
     # Add the event listener to the map
-    #map.add_listener('fullscreenchange', on_fullscreen_changed)
+    map.add_listener('fullscreenchange', on_fullscreen_changed)
 
 
 
@@ -277,13 +277,10 @@ def display_map(geodf,geodf2,columns_view,columns_view2):
 
 
 @st.cache
-def show_map():
-    m = folium.Map(location=[45.5236, -122.6750])
-    
-    
+# def show_map():
+#     m = folium.Map(location=[45.5236, -122.6750])
 
-
-    return m._repr_html_()
+#     return m._repr_html_()
 
 def main():
     st.set_page_config(APP_TITLE)
