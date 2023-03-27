@@ -162,7 +162,7 @@ import  streamlit.components.v1
 from folium.plugins import Fullscreen
 
 
-APP_TITLE = 'Κ.Ο.Μ.Υ. 2.0.4 Χάρτης'
+APP_TITLE = 'Κ.Ο.Μ.Υ. 2.0.6 Χάρτης'
 APP_SUB_TITLE = 'by CMT Prooptiki'
 
 
@@ -188,23 +188,7 @@ def display_map(geodf,geodf2,columns_view,columns_view2):
         name="periferiakes enotites", # name of the layer in the map
         show=False
     )
-    # Add the event listener to the map
-    geodf.add_child(folium.plugins.Fullscreen(
-        position="topright",
-        title="Fullscreen",
-        title_cancel="Exit fullscreen",
-        force_separate_button=True
-    ))
 
-    # Define a function that will re-render the legend when the fullscreen mode changes
-    def on_fullscreen_changed(event):
-        if event.fullscreen:
-            geodf.get_root().html.add_child(folium.Element(geodf.get_name()))
-        else:
-            geodf.get_root().html.add_child(folium.Element(geodf.get_name()))
-
-    # Add the event listener to the map
-    geodf.add_listener('fullscreenchange', on_fullscreen_changed)
 
 
 
@@ -232,7 +216,23 @@ def display_map(geodf,geodf2,columns_view,columns_view2):
     folium.LayerControl(collapsed=False).add_to(map)
     Fullscreen().add_to(map)
 
+    # Add the event listener to the map
+    geodf.add_child(folium.plugins.Fullscreen(
+        position="topright",
+        title="Fullscreen",
+        title_cancel="Exit fullscreen",
+        force_separate_button=True
+    ))
 
+    # Define a function that will re-render the legend when the fullscreen mode changes
+    def on_fullscreen_changed(event):
+        if event.fullscreen:
+            geodf.get_root().html.add_child(folium.Element(geodf.get_name()))
+        else:
+            geodf.get_root().html.add_child(folium.Element(geodf.get_name()))
+
+    # Add the event listener to the map
+    geodf.add_listener('fullscreenchange', on_fullscreen_changed)
 
 
 
