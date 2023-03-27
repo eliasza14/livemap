@@ -227,16 +227,34 @@ def display_map(geodf,geodf2,columns_view,columns_view2):
         force_separate_button=True
     ))
 
-    # Define a function that will re-render the legend when the fullscreen mode changes
-    def on_fullscreen_changed(event):
-        if event.fullscreen:
-            map2.get_root().html.add_child(folium.Element(map2.get_name()))
-        else:
-            map2.get_root().html.add_child(folium.Element(map2.get_name()))
+    # # Define a function that will re-render the legend when the fullscreen mode changes
+    # def on_fullscreen_changed(event):
+    #     if event.fullscreen:
+    #         map2.get_root().html.add_child(folium.Element(map2.get_name()))
+    #     else:
+    #         map2.get_root().html.add_child(folium.Element(map2.get_name()))
 
-    # Add the event listener to the map
-    map2.add_listener('fullscreenchange', on_fullscreen_changed)
+    # # Add the event listener to the map
+    # map2.add_listener('fullscreenchange', on_fullscreen_changed)
+    # Define a JavaScript function to run when the fullscreen mode changes
+    fullscreenchange_code = """
+        var isFullscreen = document.fullscreenElement !== null;
+        if (isFullscreen) {
+            element.getContainer().classList.add('leaflet-fullscreen');
+        } else {
+            element.getContainer().classList.remove('leaflet-fullscreen');
+        }
+    """
 
+    # Add a script element to the map that runs the fullscreenchange_code when the fullscreen mode changes
+    map2.add_child(folium.Element(f"""
+        <script>
+            var element = {map2.get_name()}._fullscreen;
+            {map2.get_name()}.on('fullscreenchange', function(e) {{
+                {fullscreenchange_code}
+            }});
+        </script>
+    """))
 
 
     # choropleth = folium.Choropleth(
