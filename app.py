@@ -216,8 +216,11 @@ def display_map(geodf,geodf2,columns_view,columns_view2):
     folium.LayerControl(collapsed=False).add_to(map)
     Fullscreen().add_to(map)
 
+
+    map2 = folium.Map()
+
     # Add the event listener to the map
-    map.add_child(folium.plugins.Fullscreen(
+    map2.add_child(folium.plugins.Fullscreen(
         position="topright",
         title="Fullscreen",
         title_cancel="Exit fullscreen",
@@ -227,12 +230,12 @@ def display_map(geodf,geodf2,columns_view,columns_view2):
     # Define a function that will re-render the legend when the fullscreen mode changes
     def on_fullscreen_changed(event):
         if event.fullscreen:
-            map.get_root().html.add_child(folium.Element(map.get_name()))
+            map2.get_root().html.add_child(folium.Element(map2.get_name()))
         else:
-            map.get_root().html.add_child(folium.Element(map.get_name()))
+            map2.get_root().html.add_child(folium.Element(map2.get_name()))
 
     # Add the event listener to the map
-    map.add_listener('fullscreenchange', on_fullscreen_changed)
+    map2.add_listener('fullscreenchange', on_fullscreen_changed)
 
 
 
