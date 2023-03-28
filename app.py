@@ -172,10 +172,10 @@ APP_SUB_TITLE = 'by CMT Prooptiki'
 def display_map(_geodf,_geodf2,columns_view,columns_view2):
         
     # Create a colormap for the first layer
-    cmap1 = LinearColormap(colors=['green'], vmin=_geodf['Πληθυσμός'].min(), vmax=_geodf['Πληθυσμός'].max())
+    cmap1 = LinearColormap(colors=['Greens'], vmin=_geodf['Πληθυσμός'].min(), vmax=_geodf['Πληθυσμός'].max())
 
     # Create a colormap for the second layer
-    cmap2 = LinearColormap(colors=['blue'], vmin=_geodf2['Πληθυσμός'].min(), vmax=_geodf2['Πληθυσμός'].max())
+    cmap2 = LinearColormap(colors=['Blues'], vmin=_geodf2['Πληθυσμός'].min(), vmax=_geodf2['Πληθυσμός'].max())
 
     # Create a legend for the first layer
     legend1 = cmap1.caption
