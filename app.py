@@ -320,8 +320,9 @@ def main():
     data = response.content.decode("utf-8")
 
     url2="https://raw.githubusercontent.com/A-PALIOS/livemap_backend/blob/main/data/geojson2.geojson"
-    response2 = requests.get(url2)
-    data2 = response2.content.decode("utf-8")
+    response = requests.get(url2)
+    data2 = response.content.decode("utf-8")
+    
     geodf = geopandas.read_file(data)
     geodf2= geopandas.read_file(data2)
 
