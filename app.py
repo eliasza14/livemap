@@ -162,7 +162,7 @@ import  streamlit.components.v1
 from folium.plugins import Fullscreen
 import requests
 
-APP_TITLE = 'Κ.Ο.Μ.Υ. 2.1.3 Χάρτης'
+APP_TITLE = 'Κ.Ο.Μ.Υ. 2.1.4 Χάρτης'
 APP_SUB_TITLE = 'by CMT Prooptiki'
 
 
