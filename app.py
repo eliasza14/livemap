@@ -323,7 +323,7 @@ def main():
     response = requests.get(url2)
     data2 = response.content.decode("utf-8")
     
-    geodf = geopandas.read_file(data)
+    geodf = geopandas.read_file("https://github.com/eliasza14/livemap/blob/main/testgeo.geojson")
     geodf2= geopandas.read_file("https://github.com/eliasza14/livemap/blob/main/testgeo2.geojson")
 
     # map_data3= pd.read_excel('komgeodata.xlsx',dtype={'KALCODE':str})
