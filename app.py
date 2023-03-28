@@ -162,7 +162,7 @@ import  streamlit.components.v1
 from folium.plugins import Fullscreen
 import requests
 
-APP_TITLE = 'Κ.Ο.Μ.Υ. 2.1.6 Χάρτης'
+APP_TITLE = 'Κ.Ο.Μ.Υ. 2.2.1 Χάρτης'
 APP_SUB_TITLE = 'by CMT Prooptiki'
 
 
@@ -323,8 +323,11 @@ def main():
     response = requests.get(url2)
     data2 = response.content.decode("utf-8")
     
-    geodf = geopandas.read_file("https://github.com/eliasza14/livemap/blob/main/testgeo.geojson")
-    geodf2= geopandas.read_file("https://github.com/eliasza14/livemap/blob/main/testgeo2.geojson")
+    # geodf = geopandas.read_file(data)
+    # geodf2= geopandas.read_file(data2)
+
+    geodf = geopandas.read_file('testgeo.geojson')
+    geodf2 = geopandas.read_file('testgeo2.geojson')
 
     # map_data3= pd.read_excel('komgeodata.xlsx',dtype={'KALCODE':str})
 
