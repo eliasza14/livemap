@@ -160,7 +160,7 @@ import geopandas
 from folium.features import GeoJsonTooltip
 import  streamlit.components.v1 
 from folium.plugins import Fullscreen
-
+import requests
 
 APP_TITLE = 'Κ.Ο.Μ.Υ. 2.1.3 Χάρτης'
 APP_SUB_TITLE = 'by CMT Prooptiki'
@@ -315,7 +315,12 @@ def main():
     #geodf = geopandas.read_file('testgeo.geojson')
     #geodf2 = geopandas.read_file('testgeo2.geojson')
 
-    geodf = geopandas.read_file("https://github.com/A-PALIOS/livemap_backend/blob/9308cd80a2cf88c36c353f98771b782d65330dba/data/geojson1.geojson")
+    url = "https://raw.githubusercontent.com/A-PALIOS/livemap_backend/main/data/geojson1.geojson"
+    response = requests.get(url)
+    data = response.content.decode("utf-8")
+
+
+    geodf = geopandas.read_file(data)
     geodf2= geopandas.read_file("https://github.com/A-PALIOS/livemap_backend/blob/main/testgeo2.geojson")
 
     # map_data3= pd.read_excel('komgeodata.xlsx',dtype={'KALCODE':str})
