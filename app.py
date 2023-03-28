@@ -166,7 +166,7 @@ APP_TITLE = 'Κ.Ο.Μ.Υ. 2.1.5 Χάρτης'
 APP_SUB_TITLE = 'by CMT Prooptiki'
 
 
-@st.cache()
+@st.cache_data()
 def display_map(geodf,columns_view,columns_view2):
     # st.write(geodf)
     # map = folium.Map(location=[40, 23], zoom_start=6, scrollWheelZoom=False, tiles='CartoDB positron')
