@@ -161,6 +161,7 @@ from folium.features import GeoJsonTooltip
 import  streamlit.components.v1 
 from folium.plugins import Fullscreen
 import requests
+from branca.colormap import LinearColormap
 
 APP_TITLE = 'Κ.Ο.Μ.Υ. 2.2.1 Χάρτης'
 APP_SUB_TITLE = 'by CMT Prooptiki'
