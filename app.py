@@ -167,13 +167,13 @@ APP_SUB_TITLE = 'by CMT Prooptiki'
 
 
 @st.cache_data()
-def display_map(geodf,geodf2,columns_view,columns_view2):
+def display_map(_geodf,_geodf2,columns_view,columns_view2):
     # st.write(geodf)
     # map = folium.Map(location=[40, 23], zoom_start=6, scrollWheelZoom=False, tiles='CartoDB positron')
     
 
 
-    map = geodf.explore(
+    map = _geodf.explore(
         location=[40,23],
         zoom_start=6,
         tiles=None,
@@ -192,7 +192,7 @@ def display_map(geodf,geodf2,columns_view,columns_view2):
 
 
 
-    geodf2.explore(
+    _geodf2.explore(
         m=map, # pass the map object
         location=[40,23],
         column="Πληθυσμός",  # make choropleth based on "BoroName" column
