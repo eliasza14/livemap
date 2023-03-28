@@ -326,8 +326,8 @@ def main():
     # geodf = geopandas.read_file(data)
     # geodf2= geopandas.read_file(data2)
 
-    geodf = geopandas.read_file('data/testgeo.geojson')
-    geodf2 = geopandas.read_file('data/testgeo2.geojson')
+    geodf = geopandas.read_file('.data/testgeo.geojson')
+    geodf2 = geopandas.read_file('.data/testgeo2.geojson')
 
     # map_data3= pd.read_excel('komgeodata.xlsx',dtype={'KALCODE':str})
 
