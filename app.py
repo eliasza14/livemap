@@ -217,15 +217,15 @@ def display_map(geodf,geodf2,columns_view,columns_view2):
     Fullscreen().add_to(map)
 
 
-    map2 = folium.Map()
+    # map2 = folium.Map()
 
-    # Add the event listener to the map
-    map2.add_child(folium.plugins.Fullscreen(
-        position="topright",
-        title="Fullscreen",
-        title_cancel="Exit fullscreen",
-        force_separate_button=True
-    ))
+    # # Add the event listener to the map
+    # map2.add_child(folium.plugins.Fullscreen(
+    #     position="topright",
+    #     title="Fullscreen",
+    #     title_cancel="Exit fullscreen",
+    #     force_separate_button=True
+    # ))
 
     # # Define a function that will re-render the legend when the fullscreen mode changes
     # def on_fullscreen_changed(event):
@@ -237,24 +237,24 @@ def display_map(geodf,geodf2,columns_view,columns_view2):
     # # Add the event listener to the map
     # map2.add_listener('fullscreenchange', on_fullscreen_changed)
     # Define a JavaScript function to run when the fullscreen mode changes
-    fullscreenchange_code = """
-        var isFullscreen = document.fullscreenElement !== null;
-        if (isFullscreen) {
-            element.getContainer().classList.add('leaflet-fullscreen');
-        } else {
-            element.getContainer().classList.remove('leaflet-fullscreen');
-        }
-    """
+    # fullscreenchange_code = """
+    #     var isFullscreen = document.fullscreenElement !== null;
+    #     if (isFullscreen) {
+    #         element.getContainer().classList.add('leaflet-fullscreen');
+    #     } else {
+    #         element.getContainer().classList.remove('leaflet-fullscreen');
+    #     }
+    # """
 
     # Add a script element to the map that runs the fullscreenchange_code when the fullscreen mode changes
-    map2.add_child(folium.Element(f"""
-        <script>
-            var element = {map2.get_name()}._fullscreen;
-            {map2.get_name()}.on('fullscreenchange', function(e) {{
-                {fullscreenchange_code}
-            }});
-        </script>
-    """))
+    # map2.add_child(folium.Element(f"""
+    #     <script>
+    #         var element = {map2.get_name()}._fullscreen;
+    #         {map2.get_name()}.on('fullscreenchange', function(e) {{
+    #             {fullscreenchange_code}
+    #         }});
+    #     </script>
+    # """))
 
 
     # choropleth = folium.Choropleth(
