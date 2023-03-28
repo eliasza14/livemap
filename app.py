@@ -184,7 +184,7 @@ def display_map(_geodf,_geodf2,columns_view,columns_view2):
         cmap="Greens",
         legend=True, # show legend
         k=10, # use 10 bins
-        legend_kwds=dict(position='bottomright', colorbar=False)
+        legend_kwds=dict(position='bottomright', colorbar=False),
         # legend_kwds=dict(colorbar=False), # do not use colorbar
         name="periferiakes enotites", # name of the layer in the map
         show=False
@@ -203,7 +203,7 @@ def display_map(_geodf,_geodf2,columns_view,columns_view2):
         legend=True,
         cmap="Blues",
         k=5, # use 10 bins
-        legend_kwds=dict(position='bottomleft', colorbar=False)
+        legend_kwds=dict(position='bottomleft', colorbar=False),
         # legend_kwds=dict(colorbar=False), # do not use colorbar
     #     legend_kwds = dict({"loc":"lower right"}),
     #      color="red", # use red color on all points
