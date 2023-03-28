@@ -315,7 +315,7 @@ def main():
     #geodf = geopandas.read_file('testgeo.geojson')
     #geodf2 = geopandas.read_file('testgeo2.geojson')
 
-    geodf = geopandas.read_file("https://github.com/A-PALIOS/livemap_backend/blob/main/testgeo1.geojson")
+    geodf = geopandas.read_file("https://github.com/A-PALIOS/livemap_backend/blob/main/data/geojson1.geojson")
     geodf2= geopandas.read_file("https://github.com/A-PALIOS/livemap_backend/blob/main/testgeo2.geojson")
 
     # map_data3= pd.read_excel('komgeodata.xlsx',dtype={'KALCODE':str})
