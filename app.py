@@ -319,9 +319,11 @@ def main():
     response = requests.get(url)
     data = response.content.decode("utf-8")
 
-
+    url2="https://github.com/A-PALIOS/livemap_backend/blob/main/data/geojson2.geojson"
+    response2 = requests.get(url2)
+    data2 = response2.content.decode("utf-8")
     geodf = geopandas.read_file(data)
-    geodf2= geopandas.read_file("https://github.com/A-PALIOS/livemap_backend/blob/main/testgeo2.geojson")
+    geodf2= geopandas.read_file(data2)
 
     # map_data3= pd.read_excel('komgeodata.xlsx',dtype={'KALCODE':str})
 
