@@ -166,8 +166,65 @@ APP_TITLE = 'Κ.Ο.Μ.Υ. 2.2.1 Χάρτης'
 APP_SUB_TITLE = 'by CMT Prooptiki'
 
 
+
 @st.cache_data()
 def display_map(_geodf,_geodf2,columns_view,columns_view2):
+        
+    # Create a colormap for the first layer
+    cmap1 = LinearColormap(colors=['green'], vmin=_geodf['Πληθυσμός'].min(), vmax=_geodf['Πληθυσμός'].max())
+
+    # Create a colormap for the second layer
+    cmap2 = LinearColormap(colors=['blue'], vmin=_geodf2['Πληθυσμός'].min(), vmax=_geodf2['Πληθυσμός'].max())
+
+    # Create a legend for the first layer
+    legend1 = cmap1.caption
+    for val, color in zip(_geodf['Πληθυσμός'].unique(), cmap1):
+        legend1 += f'<li><span style="background:{cmap1(val)}"></span>{val}</li>'
+
+    # Create a legend for the second layer
+    legend2 = cmap2.caption
+    for val, color in zip(_geodf2['Πληθυσμός'].unique(), cmap2):
+        legend2 += f'<li><span style="background:{cmap2(val)}"></span>{val}</li>'
+
+    # Create a folium map object
+    map = folium.Map(location=[40,23], zoom_start=6, scrollWheelZoom=False, tiles='CartoDB positron')
+
+    # Add the first layer to the map
+    _geojson1 = folium.GeoJson(_geodf, name="periferiakes enotites", tooltip=columns_view, popup=columns_view, style_function=lambda x: {'fillColor': cmap1(x['properties']['Πληθυσμός'])})
+    _geojson1.add_to(map)
+
+    # Add the second layer to the map
+    _geojson2 = folium.GeoJson(_geodf2, name="periferies", tooltip=columns_view2, popup=columns_view2, style_function=lambda x: {'fillColor': cmap2(x['properties']['Πληθυσμός'])})
+    _geojson2.add_to(map)
+
+    # Add the tile layer, layer control, and fullscreen control to the map
+    folium.TileLayer('Cartodb Positron', overlay=False, control=True).add_to(map)
+    folium.LayerControl(collapsed=False).add_to(map)
+    Fullscreen().add_to(map)
+
+    # Add the custom legend to the map
+    legend_html = f"""
+        <div style="position: fixed; bottom: 50px; left: 50px; z-index: 1000; font-size: 14px;">
+            <div style="background-color: white; padding: 10px; border-radius: 5px; border: 2px solid grey;">
+                <div><b>{_geodf.name}</b></div>
+                <div><ul>{legend1}</ul></div>
+                <br>
+                <div><b>{_geodf2.name}</b></div>
+                <div><ul>{legend2}</ul></div>
+            </div>
+        </div>
+    """
+    map.get_root().html.add_child(folium.Element(legend_html))
+
+    # Return the HTML representation of the map
+    return map._repr_html_()
+
+
+
+
+
+@st.cache_data()
+def display_map1(_geodf,_geodf2,columns_view,columns_view2):
     # st.write(geodf)
     # map = folium.Map(location=[40, 23], zoom_start=6, scrollWheelZoom=False, tiles='CartoDB positron')
     
